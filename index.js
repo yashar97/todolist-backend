@@ -28,5 +28,5 @@ app.use(cors(corsOptions));
 app.use('/api/usuarios', userRotuer);
 app.use('/api/tareas', tareaRouter);
 
-
-app.listen(8080, () => console.log('servidor listo'));
+const PORT = 8080 || process.env.PORT;
+app.listen(PORT, () => console.log('servidor listo'));
