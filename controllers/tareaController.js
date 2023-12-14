@@ -48,7 +48,15 @@ const eliminarTarea = async (req, res) => {
 
     try {
 
+        const usuario = await userModel.findOne({ email: req.usuario.email });
+
+        const nuevasTareas = usuario.tareas.filter(tarea => tarea._id.toString() !== idTarea.toString());
+
+        usuario.tareas = nuevasTareas;
+
+
         await tareaModel.deleteOne({ _id: idTarea });
+        await usuario.save();
 
         return res.json({ msg: 'Tarea Eliminada' });
 

@@ -32,11 +32,11 @@ const autenticar = async (req, res) => {
         const existeUsuario = await userModel.findOne({ email });
 
         if (!existeUsuario) {
-            return res.json({ msg: 'El email no está registrado' });
+            return res.status(404).json({ msg: 'El email no está registrado' });
         }
 
         if (!checkPassword(password, existeUsuario.password)) {
-            return res.json({ msg: 'Password incorrecto' });
+            return res.status(401).json({ msg: 'Password incorrecto' });
         }
 
         const usuarioAutenticado = {
