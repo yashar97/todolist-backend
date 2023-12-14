@@ -10,9 +10,9 @@ dotenv.config();
 conectarDB();
 const app = express();
 
-var dominios = ['http://localhost:5173'];
+const dominios = [process.env.FRONTEND_URL];
 
-var corsOptions = {
+const corsOptions = {
     origin: function (origin, callback) {
         if (dominios.indexOf(origin) !== -1) {
             callback(null, true)
