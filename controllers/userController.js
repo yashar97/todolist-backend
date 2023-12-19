@@ -19,7 +19,7 @@ const registro = async (req, res) => {
 
         await userModel.create(nuevoUsuario);
 
-        enviarEmail(nuevoUsuario);
+        await enviarEmail(nuevoUsuario);
 
         res.json({ msg: 'Registro exitoso' });
     } catch (error) {
