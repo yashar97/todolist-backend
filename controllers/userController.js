@@ -1,6 +1,7 @@
 import userModel from '../models/userModel.js';
 import { hashearPassword, checkPassword } from '../helpers/bcrypt.js';
 import { generarToken } from '../helpers/JWT.js';
+import enviarEmail from '../helpers/emailRegistro.js';
 
 const registro = async (req, res) => {
     const { email } = req.body;
@@ -17,6 +18,8 @@ const registro = async (req, res) => {
         nuevoUsuario.password = hashearPassword(nuevoUsuario.password);
 
         await userModel.create(nuevoUsuario);
+
+        enviarEmail(nuevoUsuario);
 
         res.json({ msg: 'Registro exitoso' });
     } catch (error) {
